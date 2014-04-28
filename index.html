@@ -1,0 +1,86 @@
+---
+layout: default
+title: Collision Hours
+---
+
+<div id="splash">
+  <h1>Innovation is the result of random conversations and ideas generated from <strong>collisions</strong>.</h1>
+  <p id="citation">Tony Hsieh, cofounder of Zappos</p>
+  <a id="down" href="#content" onclick="smoothScroll('content');return false;"></a>
+</div>
+
+<div id="content">
+  <h2>Introducing Collision Hours</h2>
+
+  <div id="collide"></div>
+
+  <p>The best things happen when people are running into each other and sharing ideas. <strong>Meet other Chicago founders, share ideas, and have fun at Collision Hours.</strong></p>
+</div>
+
+<div id="rules">
+  <h3>Rules of Collision Hours</h3>
+
+  <ol id="philosophies">
+    <li><p><strike>Do not talk about Collision Hours.</strike> Invite other awesome founders with cool ideas.</p></li>
+    <li><p>If this is your first Collision Hour, you have to pitch your startup in 30 seconds.</p></li>
+    <li><p>Don't try to "network" with people. Just have fun. The dots will connect themselves later.</p></li>
+  </ol>
+</div>
+
+<div id="rsvp">
+  <h3>Collide on May 15</h3>
+  <p id="sub-cta">You must be a founder to attend a Collision Hour. Please RSVP to help us plan accordingly.</p>
+  <a href="http://eventbrite.com/" title="RSVP for our next Collision Hour" id="cta">Join</a>
+
+  <a id="undesigned" title="Brought to you by Undesigned" href="http://www.undesigned.io/" target="_blank"></a>
+
+  <p id="downtown">"Collision hours" was coined by Tony Hsieh during a presentation about his Downtown Project.<br/>
+  <a href="http://bryce.vc/post/81685761115/collision-hours" target="_blank">Learn more about his idea of collisionable hours.</a></p>
+
+  <footer>&copy; 2014 Undesigned</footer>
+</div>
+
+<script type="text/javascript">
+  function currentYPosition() {
+    // Firefox, Chrome, Opera, Safari
+    if (self.pageYOffset) return self.pageYOffset;
+    // Internet Explorer 6 - standards mode
+    if (document.documentElement && document.documentElement.scrollTop)
+      return document.documentElement.scrollTop;
+    // Internet Explorer 6, 7 and 8
+    if (document.body.scrollTop) return document.body.scrollTop;
+    return 0;
+  }
+  function elmYPosition(eID) {
+    var elm = document.getElementById(eID);
+    var y = elm.offsetTop;
+    var node = elm;
+    while (node.offsetParent && node.offsetParent != document.body) {
+      node = node.offsetParent;
+      y += node.offsetTop;
+    } return y;
+  }
+  function smoothScroll(eID) {
+    var startY = currentYPosition();
+    var stopY = elmYPosition(eID) - 100;
+    var distance = stopY > startY ? stopY - startY : startY - stopY;
+    if (distance < 100) {
+      scrollTo(0, stopY); return;
+    }
+    var speed = 20;
+    var step = Math.round(distance / 25);
+    var leapY = stopY > startY ? startY + step : startY - step;
+    var timer = 0;
+    if (stopY > startY) {
+      for ( var i=startY; i<stopY; i+=step ) {
+        setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+        leapY += step; if (leapY > stopY) leapY = stopY; timer++;
+      } return;
+    }
+    for ( var i=startY; i>stopY; i-=step ) {
+      setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+      leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
+    }
+    return false;
+  }
+</script>
